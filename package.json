@@ -1,0 +1,33 @@
+{
+  "name": "playalong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cannedfood/Playalong.git"
+  },
+  "scripts": {
+    "build": "parcel build web/index.html --dist-dir wwwroot/",
+    "serve": "parcel web/index.html --dist-dir wwwroot/",
+    "clean": "rm -R wwwroot .parcel-cache/ obj/ bin/"
+  },
+  "author": "Benno Straub",
+  "license": "GPLV3",
+  "dependencies": {
+    "@types/youtube-player": "^5.5.3",
+    "get-youtube-id": "^1.0.1",
+    "lodash": "^4.17.20",
+    "octicons": "^8.5.0",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.3",
+    "youtube-player": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168",
+    "@vue/compiler-sfc": "^3.0.5",
+    "less": "^4.1.0",
+    "parcel": "^2.0.0-nightly.554",
+    "pug": "^3.0.0"
+  }
+}

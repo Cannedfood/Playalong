@@ -1,0 +1,109 @@
+// Arrange using flexbox
+.list {
+	display: flex;
+	flex-flow: column nowrap;
+
+	&>* {
+		position: relative;
+		width: 100%;
+		min-height: 3em;
+		padding: .5em;
+		box-sizing: border-box;
+	}
+
+	&>.header {
+		font-weight: bolder;
+		font-size: 1.1em;
+		min-height: 0;
+		padding-left: 1em;
+	}
+
+	&>.field {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: baseline;
+		.inputs {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			align-items: baseline;
+		}
+		&>input, .input {
+			flex-grow: 1;
+		}
+		.label { display: inline-block; min-width: 10em; }
+		.unit { display: inline-block; margin-left: .1em; margin-right: 1em; }
+	}
+
+	// Outline
+	&>.item, &>.header, &>.field {
+		border: 1px solid lightgray;
+
+		// Collapse borders
+		&+.item, &+.header, &+.field {
+			border-top-style: none;
+		}
+
+		// Colors
+		&.highlight {
+			background: lawngreen;
+		}
+	}
+
+	&>.item, &>.header, &>.field {
+		&>.title {
+			display: block;
+			font-weight: bold;
+			margin-right: .5em;
+		}
+		&>.subtitle {
+			display: block;
+			font-weight: normal;
+			color: gray;
+		}
+		&>.label {
+			display: inline-block;
+		}
+		&>.buttons {
+			// Align right
+			position: absolute;
+			top: 0;
+			right: .4em;
+
+			// Font
+			font-weight: normal;
+
+			// Flexbox
+			display: flex;
+			flex-flow: row;
+
+			// Center items vertically
+			height: 100%;
+			align-items: center;
+
+			// Wrap after 2-3 elements
+			max-width: 6em;
+
+			&>* { // Each button
+				// Center button contents
+				display: flex;
+				flex-flow: row;
+				align-items: center;
+				justify-content: center;
+
+				// Make them clicky-lookin
+				cursor: pointer;
+
+				// Reasonable size & styling
+				min-width: 2em;
+				min-height: 2em;
+				padding-left: .5em;
+				padding-right: .5em;
+				border-radius: .2em;
+				box-shadow: 0 .05em .05em gray;
+				// border-bottom: 1px solid gray;
+			}
+		}
+	}
+}

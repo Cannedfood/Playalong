@@ -1,0 +1,32 @@
+body {
+	font-family: Helvetica;
+}
+
+a {
+	color: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+}
+
+.muted {
+	display: inline;
+	color: gray;
+	font-size: .8em;
+}
+
+/* .bg-bad {
+	background-color: #c44;
+	color: white;
+}
+.bg-good {
+	background-color: #4a4;
+	color: white;
+}
+.bg-primary {
+	background-color: rgb(53, 140, 223);
+	color: white;
+} */
+
+.bg-bad  { background-color: #fdd; }
+.bg-good { background-color: #ded; }
+.bg-highlight { background-color: #def; }
