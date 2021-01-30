@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { listSongs, Song } from '../Backend'
+import { getSongs, Song } from '../Backend'
 
 export default defineComponent({
   name: 'SongList',
@@ -27,7 +27,7 @@ export default defineComponent({
       selectSong(song: Song) { router.push({ path: `/song/${song.id}` }) }
     });
 
-    listSongs().then(v => { model.songs = v });
+    getSongs().then(v => { model.songs = v });
 
     return model;
   }

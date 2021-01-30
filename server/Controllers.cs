@@ -28,10 +28,27 @@ namespace server.Controllers
 				Band = id,
 			};
 		}
+		[Route("songs/{id}"), HttpPost]
+		public void SaveSong(string id, Song song) {
+
+		}
+		[Route("songs/{id}"), HttpDelete]
+		public void DeleteSong(string id) {
+
+		}
 
 		[Route("songs/{id}/sections"), HttpGet]
-		public SongSection GetSections(string id) {
-			
+		public SongSection[] GetSongSections(string id) {
+			return new SongSection[]{
+				new SongSection { Name = "Intro", Start = 0, End = 12, },
+				new SongSection { Name = "Intro", Start = 0, End = 12, },
+				new SongSection { Name = "Intro", Start = 0, End = 12, },
+				new SongSection { Name = "Intro", Start = 0, End = 12, },
+			};
+		}
+		[Route("songs/{id}/sections"), HttpPost]
+		public void SaveSongSections(string id, SongSection[] songSections) {
+
 		}
 
 		// Models

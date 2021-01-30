@@ -30,10 +30,11 @@ namespace server
 		{
 			if (env.IsDevelopment())
 			{
-				GenerateTypescriptDefinitions("./web/BackendTypes.d.ts", new Type[]{
-					typeof(PlayalongApiV1.Song),
-					typeof(PlayalongApiV1.SongSection),
-				});
+				// GenerateTypescriptDefinitions("./web/BackendTypes.d.ts", new Type[]{
+				// 	typeof(PlayalongApiV1.Song),
+				// 	typeof(PlayalongApiV1.SongSection),
+				// });
+				new TypescriptBackendGenerator("web/Backend.ts").AddEndpoint(typeof(PlayalongApiV1));
 				app.UseDeveloperExceptionPage();
 			}
 			else
@@ -63,16 +64,6 @@ namespace server
 					builder.UseProxyToSpaDevelopmentServer("http://localhost:1234");
 				}
 			});
-		}
-
-		public void GenerateTypescriptDefinitions(string path, Type[] types) {
-			System.Console.WriteLine("Generating typescript definitions:");
-
-			using var file = new System.IO.StreamWriter(path, false);
-			foreach(var type in types) {
-				Console.WriteLine("- " + type.Name);
-				type.GenerateTypescriptDefinition(file);
-			}
 		}
 	}
 }

@@ -33,7 +33,7 @@ edit-song(
 <script lang="ts">
 import { ref, computed, defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getSong, listSongSections, saveSections, saveSong, SongSection } from '../Backend'
+import { getSong, getSongSections, saveSongSections, saveSong, SongSection } from '../Backend'
 import { asyncValue } from './components/Util'
 
 import Player from './components/YouTube.vue'
@@ -59,8 +59,8 @@ export default defineComponent({
 		// Navigation / Saving
 		const updated = ref(false);
 		function save() {
-			saveSong(song.value);
-			saveSections(song.value.id, sections.value);
+			saveSong(song.value.id, song.value);
+			saveSongSections(song.value.id, sections.value);
 		}
 		function back() {
 			if(updated.value && confirm("Save changes?"))
@@ -75,8 +75,9 @@ export default defineComponent({
 			band: "...",
 			bpm: 120,
 			startOffset: 0,
+			source: null
 		});
-		const sections = asyncValue(listSongSections(songId), []);
+		const sections = asyncValue(getSongSections(songId), []);
 		function newSection() {
 			let section = {
 				name: "New Section",
