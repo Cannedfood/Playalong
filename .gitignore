@@ -6,4 +6,6 @@
 /bin
 /obj
 
+web/Backend.ts
+
 /.vscode

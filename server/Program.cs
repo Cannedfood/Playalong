@@ -12,6 +12,13 @@ namespace server
 	{
 		public static void Main(string[] args)
 		{
+			if(args.Length > 0 && args[0] == "gen-backend") {
+				Console.WriteLine("Generating web/Backend.ts...");
+				new TypescriptBackendGenerator("web/Backend.ts").AddEndpoint(typeof(PlayalongApiV1));
+				Console.WriteLine("Done. Exiting.");
+				return;
+			}
+
 			Host.CreateDefaultBuilder(args)
 				.ConfigureWebHostDefaults(webBuilder => {
 					webBuilder
@@ -36,11 +43,6 @@ namespace server
 		{
 			if (env.IsDevelopment())
 			{
-				// GenerateTypescriptDefinitions("./web/BackendTypes.d.ts", new Type[]{
-				// 	typeof(PlayalongApiV1.Song),
-				// 	typeof(PlayalongApiV1.SongSection),
-				// });
-				new TypescriptBackendGenerator("web/Backend.ts").AddEndpoint(typeof(PlayalongApiV1));
 				app.UseDeveloperExceptionPage();
 			}
 			else

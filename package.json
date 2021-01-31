@@ -20,8 +20,12 @@
     }
   },
   "scripts": {
-    "build": "parcel build web/index.html --dist-dir wwwroot/",
-    "serve": "parcel web/index.html --dist-dir wwwroot/",
+    "build-frontend": "parcel build web/index.html --dist-dir wwwroot/",
+    "serve-frontend": "parcel web/index.html --dist-dir wwwroot/",
+
+    "build": "./scripts/build.sh",
+    "start": "./scripts/start.sh",
+
     "clean": "rm -R wwwroot .parcel-cache/ obj/ bin/"
   },
   "author": "Benno Straub",

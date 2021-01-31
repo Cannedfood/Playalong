@@ -35,19 +35,19 @@ namespace server.Controllers
 			for(int i = 0; i < _database.Songs.Count; i++) {
 				if(_database.Songs[i].Id == id) {
 					_database.Songs[i] = song;
-					_database.Save();
+					_ = _database.Save();
 					return;
 				}
 			}
 			_database.Songs.Add(song);
-			_database.Save();
+			_ = _database.Save();
 		}
 		[Route("songs/{id}"), HttpDelete]
 		public void DeleteSong(string id) {
 			for(int i = 0; i < _database.Songs.Count; i++) {
 				if(_database.Songs[i].Id == id) {
 					_database.Songs.RemoveAt(i);
-					_database.Save();
+					_ = _database.Save();
 					return;
 				}
 			}
