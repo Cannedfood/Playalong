@@ -2,10 +2,18 @@
   "name": "playalong",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/Cannedfood/Playalong.git"
+  },
+  "pwaManifest": {
+    "name": "Playalong",
+    "theme": "#2196f3",
+    "generateIconOptions": {
+      "baseIcon": "./icon.png",
+      "sizes": [192, 384, 512],
+      "genFavicons": true
+    }
   },
   "scripts": {
     "build": "parcel build web/index.html --dist-dir wwwroot/",
@@ -19,6 +27,7 @@
     "get-youtube-id": "^1.0.1",
     "lodash": "^4.17.20",
     "octicons": "^8.5.0",
+    "parcel-config-pwa-manifest": "0.0.8",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "youtube-player": "^5.5.2"

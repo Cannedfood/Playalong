@@ -29,4 +29,5 @@ a {
 
 .bg-bad  { background-color: #fdd; }
 .bg-good { background-color: #ded; }
+.bg-warn { background-color: #ffd; }
 .bg-highlight { background-color: #def; }

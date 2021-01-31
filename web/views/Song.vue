@@ -33,7 +33,7 @@ edit-song(
 <script lang="ts">
 import { ref, computed, defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getSong, getSongSections, saveSongSections, saveSong, SongSection } from '../Backend'
+import { getSong, saveSong, SongSection } from '../Backend'
 import { asyncValue } from './components/Util'
 
 import Player from './components/YouTube.vue'
@@ -60,7 +60,6 @@ export default defineComponent({
 		const updated = ref(false);
 		function save() {
 			saveSong(song.value.id, song.value);
-			saveSongSections(song.value.id, sections.value);
 		}
 		function back() {
 			if(updated.value && confirm("Save changes?"))

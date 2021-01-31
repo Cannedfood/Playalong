@@ -13,7 +13,11 @@ namespace server
 		public static void Main(string[] args)
 		{
 			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Program>())
+				.ConfigureWebHostDefaults(webBuilder => {
+					webBuilder
+					.UseUrls("http://*:5000", "https://*:5001")
+					.UseStartup<Program>();
+				})
 				.Build()
 				.Run();
 		}
