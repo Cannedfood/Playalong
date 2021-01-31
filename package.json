@@ -11,7 +11,11 @@
     "theme": "#2196f3",
     "generateIconOptions": {
       "baseIcon": "./icon.png",
-      "sizes": [192, 384, 512],
+      "sizes": [
+        192,
+        384,
+        512
+      ],
       "genFavicons": true
     }
   },
@@ -21,7 +25,7 @@
     "clean": "rm -R wwwroot .parcel-cache/ obj/ bin/"
   },
   "author": "Benno Straub",
-  "license": "GPLV3",
+  "license": "GPLv3",
   "dependencies": {
     "@types/youtube-player": "^5.5.3",
     "get-youtube-id": "^1.0.1",
@@ -35,8 +39,8 @@
   "devDependencies": {
     "@types/lodash": "^4.14.168",
     "@vue/compiler-sfc": "^3.0.5",
-    "less": "^4.1.0",
-    "parcel": "^2.0.0-nightly.554",
+    "less": "^4.1.1",
+    "parcel": "^2.0.0-nightly.558",
     "pug": "^3.0.0"
   }
 }
