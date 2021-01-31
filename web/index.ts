@@ -1,3 +1,7 @@
+if('serviceWorker' in navigator) {
+	navigator.serviceWorker.register("./service-worker.js")
+}
+
 import * as Vue from 'vue'
 
 import App from './App.vue'

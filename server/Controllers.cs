@@ -20,8 +20,8 @@ namespace server.Controllers
 		// Endpoints
 
 		[Route("songs"), HttpGet]
-		public IEnumerable<Song> GetSongs() {
-			return _database.Songs;
+		public IEnumerable<Song> GetSongs(string band = null, string album = null) {
+			return FilterSongs(band: band, album: album);
 		}
 
 		[Route("songs/{id}"), HttpGet]
@@ -53,11 +53,29 @@ namespace server.Controllers
 			}
 		}
 
+		[Route("bands"), HttpGet]
+		public IEnumerable<string> Bands() {
+			return _database.Songs.Select(song => song.Band).Distinct();
+		}
+
+		[Route("albums"), HttpGet]
+		public IEnumerable<string> Albums(string band = null) {
+			return FilterSongs(band: band).Select(song => song.Album).Distinct();
+		}
+
+		private IEnumerable<Song> FilterSongs(string band = null, string album = null) {
+			IEnumerable<Song> songs = _database.Songs;
+			if(band  != null) songs = songs.Where(song => song.Band == band);
+			if(album != null) songs = songs.Where(song => song.Album == album);
+			return songs;
+		}
+
 		// Models
 
 		public class Song {
 			public string Id          { get; set; }
 			public string Title       { get; set; }
+			public string Album       { get; set; }
 			public string Band        { get; set; }
 			public double Bpm         { get; set; }
 			public double StartOffset { get; set; }

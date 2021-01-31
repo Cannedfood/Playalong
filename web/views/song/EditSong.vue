@@ -8,6 +8,9 @@
 		.label Title
 		input(type="text" v-model="song.title")
 	.field
+		.label Album
+		input(type="text" v-model="song.album")
+	.field
 		.label Band
 		input(type="text" v-model="song.band")
 	.field

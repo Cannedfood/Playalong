@@ -71,6 +71,7 @@ export default defineComponent({
 		const song = asyncValue(getSong(songId), {
 			id: null,
 			title: "Loading...",
+			album: "",
 			band: "...",
 			bpm: 120,
 			startOffset: 0,

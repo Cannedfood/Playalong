@@ -47,6 +47,7 @@ export default defineComponent({
 		let song = ref<Song>({
 			id: "",
 			title: "",
+			album: "",
 			band: "",
 			bpm: 120,
 			startOffset: 0,
