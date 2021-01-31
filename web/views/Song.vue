@@ -75,9 +75,10 @@ export default defineComponent({
 			band: "...",
 			bpm: 120,
 			startOffset: 0,
-			source: null
+			source: null,
+			sections: []
 		});
-		const sections = asyncValue(getSongSections(songId), []);
+		const sections = computed(() => song.value.sections);
 		function newSection() {
 			let section = {
 				name: "New Section",
@@ -119,19 +120,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style>
-.player-container {
-	background: #333;
-}
-.player {
-	background: black;
-	height: 60vw;
-	max-height: 30vh;
-	width: 100%;
-	max-width: 53.3333333vh;
-
-	margin-left: auto;
-	margin-right: auto;
-}
-</style>

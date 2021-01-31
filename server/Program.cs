@@ -23,6 +23,8 @@ namespace server
 		{
 			services.AddSpaStaticFiles(options => { options.RootPath = "wwwroot"; });
 			services.AddControllers();
+
+			services.AddSingleton<Database>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
