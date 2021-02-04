@@ -3,16 +3,16 @@
 	a(@click="back()")
 		span ❮ Back
 	h1 {{song.title}}
-	a(v-if="song.id" @click="save()")
+	a(v-if="song.id && hasPendingChanges" @click="save()")
 		span Save
-.player-container
-	.player.center
-		player(v-if="song.source" :source="song.source")
+
+player(v-if="song.source" :source="song.source")
 
 section-list(
 	v-show="mode == 'sections'"
 	:song="song"
 	:sections="sections"
+	@selected-range="setLoop($event.start, $event.end)"
 	@editSong="editSong = true"
 	@editSection="editSection = $event || newSection()")
 
@@ -20,13 +20,13 @@ edit-section(
 	v-if="mode == 'edit-section'"
 	:song="song"
 	:section="editSection"
-	@delete="deleteSection(editSection); updated = true"
-	@done="editSection = null; updated = true")
+	@delete="deleteSection(editSection); hasPendingChanges = true"
+	@done="editSection = null; hasPendingChanges = true")
 
 edit-song(
 	v-if="mode == 'edit-song'"
 	:song="song"
-	@done="editSong = false; updated = true;")
+	@done="editSong = false; hasPendingChanges = true;")
 
 </template>
 
@@ -57,12 +57,13 @@ export default defineComponent({
 		const editSection = ref(null);
 
 		// Navigation / Saving
-		const updated = ref(false);
+		const hasPendingChanges = ref(false);
 		function save() {
+			hasPendingChanges.value = false;
 			saveSong(song.value.id, song.value);
 		}
 		function back() {
-			if(updated.value && confirm("Save changes?"))
+			if(hasPendingChanges.value && confirm("Save changes?"))
 				save();
 			router.back();
 		}
@@ -76,14 +77,18 @@ export default defineComponent({
 			bpm: 120,
 			startOffset: 0,
 			source: null,
-			sections: []
+			sections: [],
+			timeSubdivision: 4,
+			timeCount: 4
 		});
 		const sections = computed(() => song.value.sections);
 		function newSection() {
-			let section = {
+			let section: SongSection = {
 				name: "New Section",
 				start: 0,
-				end: 0
+				end: 0,
+				timeSubdivision: song.value.timeSubdivision,
+				timeCount: song.value.timeCount,
 			};
 			if(sections.value.length > 0) {
 				section.end = sections.value[sections.value.length - 1].end;
@@ -103,9 +108,14 @@ export default defineComponent({
 				editSection.value = null;
 		}
 
+		// Playback
+		function setLoop(start: number, end: number) {
+			console.log("setLoop", start, end);
+		}
+
 		return {
 			// Top Bar
-			back, save, updated,
+			back, save, hasPendingChanges,
 			// Data/Model
 			song, sections,
 			newSection, deleteSection,
@@ -115,7 +125,9 @@ export default defineComponent({
 				if(editSong.value) return 'edit-song';
 				if(editSection.value) return 'edit-section';
 				return 'sections';
-			})
+			}),
+			// Playback
+			setLoop,
 		};
 	}
 })

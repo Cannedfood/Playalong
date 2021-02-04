@@ -1,0 +1,17 @@
+.clicky {
+	cursor: pointer;
+}
+
+.clicky-bg {
+	cursor: pointer;
+	&:hover { background: lightblue; }
+}
+
+.very-clicky {
+	cursor: pointer;
+	transition: transform 100ms;
+	&:hover {
+		transform: translateY(-.2em);
+		box-shadow: .2em .2em .2em gray;
+	}
+}

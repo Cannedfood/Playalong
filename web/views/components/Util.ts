@@ -1,7 +1,7 @@
 import { Ref, ref } from "vue";
 
 export
-function selection<T = any>() {
+function listSelect<T = any>() {
 	let items = ref([] as T[]);
 	return {
 		selection: items,

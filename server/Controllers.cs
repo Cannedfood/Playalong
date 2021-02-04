@@ -73,21 +73,25 @@ namespace server.Controllers
 		// Models
 
 		public class Song {
-			public string Id          { get; set; }
-			public string Title       { get; set; }
-			public string Album       { get; set; }
-			public string Band        { get; set; }
-			public double Bpm         { get; set; }
-			public double StartOffset { get; set; }
-			public string Source      { get; set; }
+			public string Id              { get; set; }
+			public string Title           { get; set; }
+			public string Album           { get; set; }
+			public string Band            { get; set; }
+			public double Bpm             { get; set; }
+			public double TimeSubdivision { get; set; } = 4;
+			public double TimeCount       { get; set; } = 4;
+			public double StartOffset     { get; set; }
+			public string Source          { get; set; }
 
 			public List<SongSection> Sections { get; set; }
 		};
 
 		public class SongSection {
-			public string Name  { get; set; }
-			public double Start { get; set; }
-			public double End   { get; set; }
+			public string Name            { get; set; }
+			public double Start           { get; set; }
+			public double End             { get; set; }
+			public double TimeSubdivision { get; set; } = 4;
+			public double TimeCount       { get; set; } = 4;
 		};
 	}
 }

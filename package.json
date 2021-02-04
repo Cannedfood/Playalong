@@ -22,18 +22,19 @@
   "scripts": {
     "build-frontend": "parcel build web/index.html --dist-dir wwwroot/",
     "serve-frontend": "parcel web/index.html --dist-dir wwwroot/",
-
-    "build": "./scripts/build.sh",
+    "release-ubuntu.20.04-arm64": "npm run clean && npm run build-frontend && dotnet publish -c Release -r ubuntu.20.04-arm64 -o publish/ubuntu.20.04-arm64",
     "start": "./scripts/start.sh",
-
     "clean": "rm -R wwwroot .parcel-cache/ obj/ bin/"
   },
   "author": "Benno Straub",
   "license": "GPLv3",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "@types/youtube-player": "^5.5.3",
     "get-youtube-id": "^1.0.1",
-    "lodash": "^4.17.20",
     "octicons": "^8.5.0",
     "parcel-config-pwa-manifest": "0.0.8",
     "vue": "^3.0.5",

@@ -2,46 +2,47 @@
 .list.limit-width
 	.header Section Settings
 		.buttons
-			div(@click="$emit('delete')") Del
-			div(@click="$emit('done')") Ok
+			fa-icon(icon="trash" @click="$emit('delete')") Del
+			fa-icon(icon="check" @click="$emit('done')") Ok
 	.field
 		.label Title
 		input(type="text" v-model="section.name")
 	.field
 		.label Start
-		.inputs
-			.input
-				input(type="number" min="0" step="0.001" v-model="section.start")
-				.unit seconds
-			.input
-				input(type="number" min="0" step="0.125" :value="section.start / beatsPerSecond" @input="section.start = (+$event.target.value) * beatsPerSecond")
-				.unit beats
+		time-input(v-model="section.start" :bpm="song.bpm")
+	.field
+		.label Duration
+		time-input(v-model="duration" :bpm="song.bpm")
 	.field
 		.label End
+		time-input(v-model="section.end" :bpm="song.bpm")
+	.field
+		.label Time Signature
 		.inputs
-			.input
-				input(type="number" min="0" step="0.001" v-model="section.end")
-				.unit seconds
-			.input
-				input(type="number" min="0" step="0.125" :value="section.end / beatsPerSecond" @input="section.end = (+$event.target.value) * beatsPerSecond")
-				.unit beats
+			input(type="number" v-model="song.timeCount")
+			div /
+			input(type="number" v-model="song.timeSubdivision")
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, WritableComputedOptions } from "vue";
 import { Song, SongSection } from "../../Backend";
 
+import TimeInput from '../components/TimeInput.vue'
+
 export default defineComponent({
+	components: { TimeInput },
 	props: {
 		"section": { required: true, type: Object as () => SongSection },
 		"song": { required: true, type: Object as () => Song },
 	},
-	setup(props) {
-		return {
-			beatsPerSecond: computed(() => props.song.bpm / 60),
-			fromBeats(beats: number) { return beats * this.beatsPerSecond; },
-			toBeats(seconds: number) { return seconds / this.beatsPerSecond; }
-		}
+	setup({ section }) {
+		let duration = computed<number>({
+			get() { return section.end - section.start },
+			set(value) { section.end = section.start + value; }
+		})
+
+		return { duration }
 	}
 })
 </script>

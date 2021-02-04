@@ -3,7 +3,7 @@
 	display: flex;
 	flex-flow: column nowrap;
 
-	&>* {
+	>* {
 		position: relative;
 		width: 100%;
 		min-height: 3em;
@@ -11,25 +11,27 @@
 		box-sizing: border-box;
 	}
 
-	&>.header {
+	>.header {
 		font-weight: bolder;
 		font-size: 1.1em;
 		min-height: 0;
 		padding-left: 1em;
 	}
 
-	&>.field {
+	>.field {
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
 		align-items: baseline;
 		.inputs {
+			flex-grow: 1;
+
 			display: flex;
 			flex-flow: row wrap;
-			justify-content: space-between;
+			justify-content: left;
 			align-items: baseline;
 		}
-		&>input, .input {
+		>input, >.input {
 			flex-grow: 1;
 		}
 		.label { display: inline-block; min-width: 10em; }
@@ -37,7 +39,7 @@
 	}
 
 	// Outline
-	&>.item, &>.header, &>.field {
+	>.item, >.header, >.field {
 		border: 1px solid lightgray;
 
 		// Collapse borders
@@ -51,21 +53,21 @@
 		}
 	}
 
-	&>.item, &>.header, &>.field {
-		&>.title {
+	>.item, >.header, >.field {
+		>.title {
 			display: block;
 			font-weight: bold;
 			margin-right: .5em;
 		}
-		&>.subtitle {
+		>.subtitle {
 			display: block;
 			font-weight: normal;
 			color: gray;
 		}
-		&>.label {
+		>.label {
 			display: inline-block;
 		}
-		&>.buttons {
+		>.buttons {
 			// Align right
 			position: absolute;
 			top: 0;
@@ -85,7 +87,7 @@
 			// Wrap after 2-3 elements
 			max-width: 6em;
 
-			&>* { // Each button
+			>* { // Each button
 				// Center button contents
 				display: flex;
 				flex-flow: row;
@@ -103,6 +105,13 @@
 				border-radius: .2em;
 				box-shadow: 0 .05em .05em gray;
 				// border-bottom: 1px solid gray;
+			}
+
+			>svg, >.icon {
+				min-width:  1.5em;
+				min-height: 1.5em;
+				padding: .5em;
+				box-shadow: none;
 			}
 		}
 	}

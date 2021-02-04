@@ -5,6 +5,7 @@
 /wwwroot
 /bin
 /obj
+/publish
 
 web/Backend.ts
 

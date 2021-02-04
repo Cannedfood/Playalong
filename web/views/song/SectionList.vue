@@ -2,7 +2,7 @@
 .list.limit-width
 	.header Song
 		.buttons
-			a(@click="$emit('editSong')") Options
+			fa-icon(icon="cog" @click="$emit('editSong')")
 	.item.clicky(
 		v-for="section of sections"
 		@click="toggleSelect(section)"
@@ -10,25 +10,36 @@
 	)
 		.label {{section.name}}
 		.buttons
-			div(@click.stop="$emit('editSection', section)") Edit
-	.item.clicky(@click="$emit('editSection', null)")
-		.title Add
+			fa-icon(icon="edit" @click.stop="$emit('editSection', section)")
+	.item.clicky-bg(@click="$emit('editSection', null)")
+		.title.text-center
+			fa-icon(icon="plus")
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { SongSection } from "../../Backend";
-import { selection } from '../components/Util'
+import { defineComponent, watch } from "vue";
+import { Song, SongSection } from "../../Backend";
+import { listSelect } from '../components/Util'
 
 export default defineComponent({
 	props: {
-		"song": { required: true },
-		"sections": { required: true }
+		"song": { required: true, type: Object as () => Song },
+		"sections": { required: true, type: Array as () => SongSection[] }
 	},
-	setup() {
-		const { toggleSelect, isSelected } = selection<SongSection>();
+	emits: ["selected-range", "editSection", "editSong"],
+	setup(_, {emit}) {
+		const { toggleSelect, isSelected, selection } = listSelect<SongSection>();
+
+		watch(selection, () => {
+			emit('selected-range', {
+				start: selection.value.map(v => v.start).reduce((a, b) => Math.min(a, b), null),
+				end: selection.value.map(v => v.end).reduce((a, b) => Math.max(a, b), null),
+			});
+		});
+
 		return {
-			toggleSelect, isSelected
+			toggleSelect,
+			isSelected,
 		};
 	}
 })

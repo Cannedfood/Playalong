@@ -4,16 +4,16 @@
 		div(ref="original")
 </template>
 
-<style>
+<style lang="less">
 .player-container {
 	background: #333;
 }
 .player {
 	background: black;
 	height: 60vw;
-	max-height: 30vh;
 	width: 100%;
-	max-width: 53.3333333vh;
+	max-height: calc(20cm / 16 * 9);
+	max-width: 20cm;
 
 	margin-left: auto;
 	margin-right: auto;
@@ -28,7 +28,20 @@ import createPlayer from 'youtube-player'
 import getYoutubeId from 'get-youtube-id'
 import { YouTubePlayer } from "youtube-player/dist/types";
 
-import _ from 'lodash'
+function debounce<T>(func: T, wait: number, immediate?: boolean): T {
+	var timeout: NodeJS.Timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) (func as any).apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) (func as any).apply(context, args);
+	} as unknown as T;
+};
 
 export default defineComponent({
 	props: {
@@ -40,7 +53,7 @@ export default defineComponent({
 		const parentElement = ref<HTMLElement>(null);
 		const player = ref<YouTubePlayer>(null);
 
-		let updateSize = _.debounce(() => {
+		let updateSize = debounce(() => {
 			player.value.setSize(parentElement.value.clientWidth, parentElement.value.clientHeight);
 		}, 100);
 
