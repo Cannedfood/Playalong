@@ -1,5 +1,5 @@
 if('serviceWorker' in navigator) {
-	navigator.serviceWorker.register("./service-worker.js")
+  navigator.serviceWorker.register("./service-worker.js")
 }
 
 import * as Vue from 'vue'
@@ -21,6 +21,6 @@ library.add(faEdit, faTrash, faCog, faCheck, faPlus);
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const app = Vue.createApp(App)
-	.use(router)
-	.component('fa-icon', FontAwesomeIcon)
-	.mount('#app')
+  .use(router)
+  .component('fa-icon', FontAwesomeIcon)
+  .mount('#app')

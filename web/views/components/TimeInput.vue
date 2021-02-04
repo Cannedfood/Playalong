@@ -1,8 +1,8 @@
 <template lang="pug">
 .inputs
-	input(v-if="mode == 'seconds'"  type="number" min="0" step="0.001" v-model="seconds")
-	input(v-if="mode == 'beats'"    type="number" min="0" step="0.125" v-model="beats")
-	input(v-if="mode == 'measures'" type="number" min="0" step="0.125" v-model="measures")
+	input(v-if="mode == 'seconds'"  type="number" min="0" step="0.001" v-model.lazy="seconds")
+	input(v-if="mode == 'beats'"    type="number" min="0" step="0.125" v-model.lazy="beats")
+	input(v-if="mode == 'measures'" type="number" min="0" step="0.125" v-model.lazy="measures")
 	button.unit(@click="nextMode()") {{mode}}
 </template>
 

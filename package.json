@@ -30,19 +30,16 @@
   "license": "GPLv3",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
-    "@types/youtube-player": "^5.5.3",
     "get-youtube-id": "^1.0.1",
-    "octicons": "^8.5.0",
     "parcel-config-pwa-manifest": "0.0.8",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3",
     "youtube-player": "^5.5.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.168",
+    "@types/youtube-player": "^5.5.3",
     "@vue/compiler-sfc": "^3.0.5",
     "less": "^4.1.1",
     "parcel": "^2.0.0-nightly.558",

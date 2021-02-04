@@ -8,8 +8,9 @@
   router-link.item.very-clicky(v-for="song in songs" :to="`/song/${song.id}`")
     .title {{song.title}}
     .subtitle {{[song.band, song.album].filter(v=>v).join(' - ')}}
-  router-link.button.bg-highlight.clicky(to="/addSong")
-    .title Add
+  router-link.button.clicky-bg(to="/addSong")
+    .title.text-center
+      fa-icon(icon="plus")
 </template>
 
 <script lang="ts">
