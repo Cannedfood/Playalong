@@ -22,9 +22,9 @@
   "scripts": {
     "build-frontend": "parcel build web/index.html --dist-dir wwwroot/",
     "serve-frontend": "parcel web/index.html --dist-dir wwwroot/",
-    "release-ubuntu.20.04-arm64": "npm run clean && npm run build-frontend && dotnet publish -c Release -r ubuntu.20.04-arm64 -o publish/ubuntu.20.04-arm64",
+    "release-ubuntu.20.04-arm64": "npm run clean && npm run build-frontend && dotnet publish -c Release -r ubuntu.20.04-arm64 -o publish/ubuntu.20.04-arm64/server",
     "start": "./scripts/start.sh",
-    "clean": "rm -R wwwroot .parcel-cache/ obj/ bin/"
+    "clean": "rm -Rf wwwroot .parcel-cache/ obj/ bin/ publish/*/server"
   },
   "author": "Benno Straub",
   "license": "GPLv3",
