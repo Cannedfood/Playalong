@@ -28,20 +28,7 @@ import createPlayer from 'youtube-player'
 import getYoutubeId from 'get-youtube-id'
 import { YouTubePlayer } from "youtube-player/dist/types";
 
-function debounce<T>(func: T, wait: number, immediate?: boolean): T {
-  var timeout: NodeJS.Timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) (func as any).apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) (func as any).apply(context, args);
-  } as unknown as T;
-};
+import { debounce } from '../../util/Debounce'
 
 export default defineComponent({
   props: {
@@ -64,15 +51,12 @@ export default defineComponent({
         host: 'https://www.youtube.com/iframe_api'
       }
 
-      // const host = props.nocookie? 'https://www.youtube-nocookie.com' : 'https://www.youtube.com';
-
       parentElement.value = original.value.parentElement;
 
       let el = document.createElement('div');
       parentElement.value.appendChild(el);
 
       let p = createPlayer(el, {
-        // host,
         width:  parentElement.value.clientWidth,
         height: parentElement.value.clientHeight,
         videoId: getYoutubeId(props.source),

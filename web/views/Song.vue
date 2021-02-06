@@ -31,17 +31,18 @@ edit-song(
 </template>
 
 <script lang="ts">
-import { ref, computed, defineComponent } from 'vue'
+import { ref, computed, defineComponent, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getSong, saveSong, SongSection } from '../Backend'
-import { asyncValue } from './components/Util'
+import { asyncValue } from '../util/Vuetil'
+
+import Looper from '../util/Looper'
 
 import Player from './components/YouTube.vue'
 
 import SectionList from './song/SectionList.vue'
 import EditSong    from './song/EditSong.vue'
 import EditSection from './song/EditSection.vue'
-import { YouTubePlayer } from 'youtube-player/dist/types'
 
 export default defineComponent({
   components: {
@@ -90,6 +91,7 @@ export default defineComponent({
         name: "New Section",
         start: 0,
         end: 0,
+        bpm: song.value.bpm,
         timeSubdivision: song.value.timeSubdivision,
         timeCount: song.value.timeCount,
       };
@@ -112,31 +114,9 @@ export default defineComponent({
     }
 
     // Playback
-    let loop = null;
-    let currentStart = null;
-    let currentEnd = null;
-    function unsetLoop() {
-      if(loop) {
-        clearInterval(loop);
-      }
-    }
-    function setLoop(start: number, end: number) {
-      console.log("setLoop", start, end);
+    let looper = new Looper(seconds => playerElement.value.player.seekTo(seconds));
 
-      unsetLoop();
-
-      let player = playerElement.value.player;
-
-      if(start !== null) {
-        player.seekTo(start, true);
-      }
-
-      if(end) {
-        loop = setInterval(() => {
-          player.seekTo(start, true);
-        }, (end - start) * 1000);
-      }
-    }
+    onBeforeUnmount(() => looper.stopLoop());
 
     return {
       // Top Bar
@@ -153,7 +133,7 @@ export default defineComponent({
         return 'sections';
       }),
       // Playback
-      setLoop,
+      setLoop: (start, end) => looper.setLoop(start, end),
     };
   }
 })

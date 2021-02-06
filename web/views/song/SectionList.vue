@@ -8,7 +8,8 @@
     @click="toggleSelect(section)"
     :class="{ highlight: isSelected(section) }"
   )
-    .label {{section.name}}
+    .title {{section.name}}
+    .subtitle {{timestamp(section.start)}} - {{timestamp(section.end)}} ({{section.end - section.start}}s)
     .buttons
       fa-icon(icon="edit" @click.stop="$emit('editSection', section)")
   .item.clicky-bg(@click="$emit('editSection', null)")
@@ -19,7 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Song, SongSection } from "../../Backend";
-import { listSelect } from '../components/Util'
+import { listSelect } from '../../util/Vuetil'
 
 export default defineComponent({
   props: {
@@ -44,6 +45,14 @@ export default defineComponent({
         }
       },
       isSelected,
+      beat(n: number) {
+
+      },
+      timestamp(n: number) {
+        let minutes = Math.floor(n / 60);
+        let seconds = n - minutes;
+        return `${minutes}:${seconds}`;
+      }
     };
   }
 })

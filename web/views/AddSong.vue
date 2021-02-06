@@ -27,8 +27,7 @@ import { saveSong, Song } from '../Backend'
 
 import EditSong from './song/EditSong.vue'
 import Youtube from './components/YouTube.vue'
-import { concatToId } from './components/Util'
-
+import { concatToId } from '../util/Id'
 
 export default defineComponent({
   components: { EditSong, Youtube },
@@ -53,6 +52,8 @@ export default defineComponent({
       startOffset: 0,
       source: "",
       sections: [],
+      timeSubdivision: 4,
+      timeCount: 4,
     });
 
     async function done() {

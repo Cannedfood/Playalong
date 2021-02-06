@@ -74,12 +74,15 @@ namespace server.Controllers
 
 		public class Song {
 			public string Id              { get; set; }
+			
 			public string Title           { get; set; }
 			public string Album           { get; set; }
 			public string Band            { get; set; }
-			public double Bpm             { get; set; }
+
+			public double Bpm             { get; set; } = 120;
 			public double TimeSubdivision { get; set; } = 4;
 			public double TimeCount       { get; set; } = 4;
+
 			public double StartOffset     { get; set; }
 			public string Source          { get; set; }
 
@@ -88,8 +91,11 @@ namespace server.Controllers
 
 		public class SongSection {
 			public string Name            { get; set; }
+
 			public double Start           { get; set; }
 			public double End             { get; set; }
+
+			public double Bpm             { get; set; } = 120;
 			public double TimeSubdivision { get; set; } = 4;
 			public double TimeCount       { get; set; } = 4;
 		};
